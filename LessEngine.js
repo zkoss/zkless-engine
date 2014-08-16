@@ -14,8 +14,7 @@ module.exports = {
 
 		    parser.parse(data, function(err, tree) {
 				if (err)
-					throw err;
-					
+					throw err;					
 				var css = tree.toCSS();
 				css = helper.decodeDsp(css);
 				if (callback) {
@@ -23,6 +22,6 @@ module.exports = {
 				}
 			});
 		});
-	},
+	}
 }
 

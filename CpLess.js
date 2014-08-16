@@ -24,10 +24,10 @@ const theme = process.argv[5] ? process.argv[5] : '';
 	});
 
 	walker.on('end', function() {
-
 		var fp, fn;
 
 		for (var i = 0; i < files.length; i++) {
+
 			fp = fn = files[i];
 			fn = fn.substring(fn.lastIndexOf('/') + 1);
 
@@ -38,37 +38,50 @@ const theme = process.argv[5] ? process.argv[5] : '';
 			}
 		}
 
-		encodeImports(function() {
-			lessCompile();
-		});
+		encodeImports();
 	});
 
-	function encodeImports(callback) {
+	function encodeImports() {
 		if (imports.length > 0)
 			var last = imports[imports.length - 1];
 
 		for (var i = 0; i < imports.length; i++) {
 			var cf = imports[i],
 				data = fs.readFileSync(cf, 'utf-8');
-				
+
 			if (data) {
 				data = helper.encodeDsp(data, '', classpath);
-				cf = cf.replace(srcDir, destDir);
-				mkpath.sync(cf.substring(0, cf.lastIndexOf('/')), 0700);
-				fs.writeFileSync(cf, data);
-			}
-
-			if (imports[i] == last && callback) {
-				console.log('call back!!!!!!!!');
-				callback();
+				var dst = cf.replace(srcDir, destDir);
+				mkpath.sync(dst.substring(0, dst.lastIndexOf('/')), 0700);
+				fs.writeFileSync(dst, data);
 			}
 		}
+		lessCompile();
+	}
+
+	function encodeFiles() {
+		if (files.length > 0)
+			var last = files[files.length - 1];
+
+		for (var i = 0; i < files.length; i++) {
+			var cf = files[i],
+				data = fs.readFileSync(cf, 'utf-8');
+
+			if (data) {
+				data = helper.encodeDsp(data, '', classpath);
+				var dst = cf.replace(srcDir, destDir);
+				mkpath.sync(dst.substring(0, dst.lastIndexOf('/')), 0700);
+				fs.writeFileSync(dst, data);
+				console.log(dst);
+			}
+		}
+		lessCompile();
 	}
 
 	function lessCompile() {
-		var last = targets[targets.length -1];
+		var last = targets[targets.length -1].replace(destDir, srcDir);
 		for (var i = 0; i < targets.length; i++) {
-			var cp = targets[i];
+			var cp = targets[i].replace(destDir, srcDir);
 			console.log('compiling: ' + cp);
 			compiler.compile(cp, classpath, theme, function(css, path) {
 				//replace folder name

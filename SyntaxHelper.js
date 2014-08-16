@@ -98,9 +98,8 @@ module.exports = {
 					dataArray[i] = current.substring(0, start) + sub + current.substring(end + 1);
 				}
 
-				if (current.indexOf('@import "classpath:web')) {
-					console.log(current);
-					dataArray[i] = current.replace('classpath:web/', classpath.replace('src', 'codegen'));
+				if (current.indexOf('@import "classpath:web') >= 0) {
+					dataArray[i] = current.replace('classpath:web/', classpath.replace('src', 'codegen') + '/web/');
 				}
 
 				//2. escape like @{variable}
