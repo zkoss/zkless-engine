@@ -1,5 +1,6 @@
-fs = require('fs');
-var S = require('string');
+var S = require('string'),
+	fs = require('fs');
+
 const FAKE_PROPERTY = '__faker___:';
 
 module.exports = {
@@ -64,9 +65,8 @@ module.exports = {
 		}
 	},
 
-	encodeDsp: function(data, theme) {
+	encodeDsp: function(data, theme, classpath) {
 		data = this.fixSyntaxIssue(data);
-
 		var importRe = new RegExp("@import[\\s]{1,}[\"']{1}~./[\\w/.]{1,}[\"']{1}[;]{1}"),
 			escapeRe = new RegExp("@\\{([^\\}]+)\\}"),
 			elurlRe = new RegExp("url\\(\\$\\{([^\\}]+)\\}\\)"),
@@ -74,7 +74,6 @@ module.exports = {
 			taglibRe = new RegExp("<(.*)>");
 
 		if (data) {
-
 			var dataArray = data.split('\n'),
 				sub = '',
 				matched,
@@ -84,22 +83,25 @@ module.exports = {
 
 			for (var i = 0; i < dataArray.length; i++) {
 				current = dataArray[i];
-
 				//1. resolve imports start with ~./ */
 				if (matched = current.match(importRe)) {    
 					sub = matched[0];
 					start = current.indexOf(sub);
 					end = start + sub.length;
-					
 					var quoteIndex = sub.indexOf('~'),
 						quote = sub.substring(quoteIndex - 1, quoteIndex),
 						re = new RegExp("[\"']{1}~./"),
-						// newStr = quote + 'classpath:web/';
-						newStr = quote + './web/';
-
+						//handle special case when import dir is in zkmax
+						dir = sub.indexOf('/zkmax/less/') < 0 ? classpath.replace('src', 'codegen') : '../../zkcml/zkmax/codegen/archive',
+						newStr = quote + dir + '/web/';
 					sub = sub.replace(re, newStr);
 					dataArray[i] = current.substring(0, start) + sub + current.substring(end + 1);
-				} 
+				}
+
+				if (current.indexOf('@import "classpath:web')) {
+					console.log(current);
+					dataArray[i] = current.replace('classpath:web/', classpath.replace('src', 'codegen'));
+				}
 
 				//2. escape like @{variable}
 				if (current.match(escapeRe)) {      
@@ -121,7 +123,7 @@ module.exports = {
 					}
 
 					dataArray[i] = current = newline;
-				} 
+				}
 
 				//3. resolve EL function in url() like url(${c:endcodeThemeURL})
 				if (current.match(elurlRe)) {    
@@ -191,8 +193,15 @@ module.exports = {
 				matched = null;
 				current = '';
 			}
+
 			if (theme) {
-				var s = '@import "classpath:web/' + theme + '/zul/less/_zkvariables.less";';
+				var s;
+				if (theme === 'sapphire' || theme === 'silvertail') {
+					s = '@import ' + '"../../zkthemes/' + theme + '/src/archive/web/' + theme + '/zul/less/_zkvariables.less";';
+				} else if (theme === 'atlantic') {
+					s = '@import ' + '"../../' + theme + '/src/main/resources/web/' + theme + '/zul/less/_zkvariables.less";';
+				}
+				
 				dataArray.splice(0,0,s);
 			}
 		}
@@ -200,12 +209,12 @@ module.exports = {
 	},
 
 	decodeDsp: function(data) {
-					//1. restore DSP declaration like <@taglib @>
+				      //1. restore DSP declaration like <@taglib @>	
 		return S(data).replaceAll('/*__TAGLIB ', '')
-				   .replaceAll(' TAGLIB__*/', '')
-				    //2. restore EL function like ${c:encodeThemeURL}
-				   .replaceAll('__EL__', '${').replaceAll('__ELSP__', ':')
-				   .replaceAll('__ELEND__', '}').replaceAll(FAKE_PROPERTY, '').s;
+				   	  .replaceAll(' TAGLIB__*/', '')
+				      //2. restore EL function like ${c:encodeThemeURL}
+				      .replaceAll('__EL__', '${').replaceAll('__ELSP__', ':')
+				      .replaceAll('__ELEND__', '}').replaceAll(FAKE_PROPERTY, '').s;
 	},
 
 	removeComments: function(str) {

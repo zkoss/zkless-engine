@@ -9,7 +9,6 @@
     "walk": "^2.3.3"
   },
   "devDependencies": {
-    "grunt": "^0.4.5",
     "less": "^1.7.4",
     "string": "^1.9.1",
     "walk": "^2.3.3"

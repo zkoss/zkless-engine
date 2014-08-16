@@ -1,0 +1,24 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class SimpleLessc {
+
+	public static void main(String[] args) {
+		Runtime rt = Runtime.getRuntime();
+		try {
+			ProcessBuilder builder = new ProcessBuilder("lessc.cmd C:\\home\\Han\\zk60\\zk\\znle\\javasrc\\ZkNodeLessEngine\\simpleless.less");
+			Process pr = builder.start();
+			// Process pr = rt.exec("lessc simpleless.less");
+			BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+			String line = null;
+			while ((line = input.readLine()) != null) {
+				System.out.println(line);
+			}
+		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
