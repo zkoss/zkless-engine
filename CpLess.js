@@ -59,25 +59,6 @@ const theme = process.argv[5] ? process.argv[5] : '';
 		lessCompile();
 	}
 
-	function encodeFiles() {
-		if (files.length > 0)
-			var last = files[files.length - 1];
-
-		for (var i = 0; i < files.length; i++) {
-			var cf = files[i],
-				data = fs.readFileSync(cf, 'utf-8');
-
-			if (data) {
-				data = helper.encodeDsp(data, '', classpath);
-				var dst = cf.replace(srcDir, destDir);
-				mkpath.sync(dst.substring(0, dst.lastIndexOf('/')), 0700);
-				fs.writeFileSync(dst, data);
-				console.log(dst);
-			}
-		}
-		lessCompile();
-	}
-
 	function lessCompile() {
 		var last = targets[targets.length -1].replace(destDir, srcDir);
 		for (var i = 0; i < targets.length; i++) {
