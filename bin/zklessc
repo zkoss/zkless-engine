@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+
+console.log('Node.js Module for ZKLess Engine');
+
+// args = process.argv.slice(2);
+// console.log('arg[0]: ' + args[0]);
+// console.log('arg[1]: ' + args[1]);
+
+// var path = require('path');
+// var appDir = path.dirname(require.main.filename);
+// console.log(appDir);
