@@ -1,18 +1,15 @@
 {
-  "name": "zle",
-  "version": "0.0.0",
-  "description": "A temp repository for zle",
+  "name": "zkless-engine",
+  "version": "0.1.0",
+  "description": "To compile LESS files into *.css.dsp (using lesscss-engine from ",
   "main": "CpLess.js",
   "dependencies": {
     "less": "^1.7.4",
-    "string": "^1.9.0",
-    "walk": "^2.3.3"
-  },
-  "devDependencies": {
-    "less": "^1.7.4",
+    "ncp": "^0.6.0",
     "string": "^1.9.1",
     "walk": "^2.3.3"
   },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,7 +17,10 @@
     "type": "git",
     "url": "https://github.com/hanhsu/zle"
   },
-  "author": "",
+  "keywords": [
+    "zkless"
+  ],
+  "author": "hanhsu <hanhsu@potix.com> (https://github.com/hanhsu)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/hanhsu/zle/issues"

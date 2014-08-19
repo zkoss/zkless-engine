@@ -4,12 +4,12 @@ var less = require('less'),
 
 module.exports = {
 
-	compile: function(path, classpath, theme, callback) {
+	compile: function(path, importpath, theme, callback) {
 		// options.rootpath = root;
 		fs.readFile(path, 'utf-8', function (err, data) {
 			if (err) 
 		        throw err;
-		    var data = helper.encodeDsp(data, theme, classpath),
+		    var data = helper.encodeDsp(data, theme, importpath),
 		  	    parser = new(less.Parser);
 
 		    parser.parse(data, function(err, tree) {

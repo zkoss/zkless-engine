@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;ZkNodeLessEngine&apos;" deleteContents="true" description="Delete resource &apos;ZkNodeLessEngine&apos;" element1="/ZkNodeLessEngine" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1407904560909"/>&#x0A;<refactoring comment="Delete resource &apos;zkless-node-engine-maven-plugin&apos;" deleteContents="true" description="Delete resource &apos;zkless-node-engine-maven-plugin&apos;" element1="/zkless-node-engine-maven-plugin" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1407911033032"/>
-</session>

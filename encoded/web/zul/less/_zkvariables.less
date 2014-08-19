@@ -1,0 +1,289 @@
+
+
+
+
+@baseFontSize:                 14px;
+@baseTitleFontFamily:          "Helvetica Neue", Helvetica, Arial, sans-serif;
+@baseContentFontFamily:        Arial, Sans-serif;
+@baseLineHeight:               14px;
+
+
+@baseHeight:                   8px;
+@baseIconHeight:               @baseHeight * 2;
+@baseButtonHeight:             @baseHeight * 3;
+@baseBarHeight:                @baseHeight * 4;
+@baseTitleHeight:              @baseHeight * 5;
+
+
+@baseWidth:                    8px;
+@baseIconWidth:                @baseWidth * 2;
+@baseButtonWidth:              @baseWidth * 3;
+@baseBarWidth:                 @baseWidth * 4;
+
+
+
+
+
+@fontSizeXLarge:               ceil(@baseFontSize * 1.25);
+@fontSizeLarge:                floor(@baseFontSize * 1.15);
+@fontSizeMedium:               ceil(@baseFontSize * 0.85);
+@fontSizeSmall:                floor(@baseFontSize * 0.8);
+@fontSizeXSmall:               ceil(@baseFontSize * 0.7);
+
+@baseBorderRadius:             4px;
+@borderRadiusLarge:            6px;
+@borderRadiusSmall:            3px;
+
+@basePopupZIndex:              88000;
+
+
+
+
+
+@baseTextColor:                #000000;
+@textColorGray:                #555555;
+@textColorGrayDark:            #363636;
+@textColorGrayLight:           #636363;
+@textColorBlue:                #2184BA;
+@textColorGreen:               #46A546;
+@textColorOrange:              #F7941D;
+
+
+@baseBorderColor:              #CFCFCF;
+
+
+@baseBackgroundColor:          #FFFFFF;
+
+
+@baseGradientStart:            #FEFEFE;
+@baseGradientEnd:              #EEEEEE;
+
+
+
+
+@iconColor:                    #636363;
+@iconHoverColor:               #636363;
+@iconDisabledColor:            #AAAAAA;
+
+
+
+
+@buttonBorderColor:            #A9A9A9;
+@buttonGradientStart:          #FEFEFE;
+@buttonGradientEnd:            #EEEEEE;
+
+
+
+
+@inputBorderColor:             @baseBorderColor;
+@inputBackgroundColor:         @baseBackgroundColor;
+
+
+
+
+@meshTitleBorderColor:         @baseBorderColor;
+@meshContentBorderColor:       #FFFFFF;
+@meshBackgroundColor:          #FFFFFF;
+@meshStripeBackgroundColor:    #F7F7F7;
+@meshFootBackgroundColor:      #FAFAFA;
+@meshTitleHoverStart:          #F2F9FE;
+@meshTitleHoverEnd:            #D6F0FD;
+@meshContentHoverStart:        #F2F9FE;
+@meshContentHoverEnd:          #D6F0FD;
+
+
+
+
+
+@activeColor:                  @baseTextColor;
+@activeBorderColor:            #499EB3;
+@activeBackgroundColor:        #86E2F9;
+@activeGradientStart:          #C3F5FE;
+@activeGradientEnd:            #86E2F9;
+
+
+@focusColor:                   @baseTextColor;
+@focusBorderColor:             #00B9FF;
+@focusBackgroundColor:         @baseGradientEnd;
+@focusGradientStart:           @baseGradientStart;
+@focusGradientEnd:             @baseGradientEnd;
+
+
+@hoverColor:                   @textColorGrayLight;
+@hoverBorderColor:             #8FB9D0;
+@hoverBackgroundColor:         #D6F0FD;
+@hoverGradientStart:           #F2F9FE;
+@hoverGradientEnd:             #D6F0FD;
+
+
+@disabledColor:                #AAAAAA;
+@disabledBackgroundColor:      #F0F0F0;
+@disabledOpacity:              0.6;
+
+
+@invalidBorderColor:           #DD7777;
+
+
+@readonlyBorderColor:          #E6E6E6;
+@readonlyBackgroundColor:      #FAFAFA;
+
+
+@selectedColor:                @textColorGrayLight;
+@selectedBorderColor:          @baseBorderColor;
+@selectedBackgroundColor:      #BEE7FC;
+@selectedGradientStart:        #E5F4FB;
+@selectedGradientEnd:          #D3EDFA;
+
+
+@selectedHoverColor:           @textColorGrayLight;
+@selectedHoverBorderColor:     @baseBorderColor;
+@selectedHoverBackgroundColor: #C5E7F8;
+@selectedHoverGradientStart:   #CFEBF8;
+@selectedHoverGradientEnd:     #A5DAF5;
+
+
+@checkedColor:                 #2184BA;
+@checkedBorderColor:           #8E8F8F;
+@checkedBackgroundColor:       #F8F8F8;
+@checkedGradientStart:         #F4FAFD;
+@checkedGradientEnd:           #E2EFF6;
+
+
+@collapsedBorderColor:         @baseBorderColor;
+@collapsedBackgroundColor:     #FCFCFC;
+
+
+
+
+
+@maskBackgroundColor:          #E0E1E3;
+@loadingBackgroundColor:       #E3E3E3;
+
+
+@scrollbarWidth:               16px;
+@scrollbarHeight:              16px;
+@scrollbarBorderColor:         #838383;
+@scrollbarBackgroundColor:     #DDDDDD;
+@scrollbarGradientStart:       #FFFFFF;
+@scrollbarGradientEnd:         #CFCFCF;
+
+
+@dragColor:                    #FFFFFF;
+@dragBackgroundColor:          #E0EAF0;
+@dragHoverBackgroundColor:     #ADD2FF;
+@dragAllowBorderColor:         #11AA33;
+@dragAllowBackgroundColor:     #11AA33;
+@dragDisAllowBorderColor:      #C13634;
+@dragDisAllowBackgroundColor:  #C13634;
+
+
+@splitterSize:                 8px;
+@splitterGradientStart:        #FDFDFD;
+@splitterGradientEnd:          #F1F1F1;
+
+
+@calendarTitleColor:           @textColorGrayLight;
+@calendarTitleHoverColor:      @textColorGrayLight;
+@calendarCellColor:            @textColorGrayLight;
+@calendarSelectedColor:        #008BB6;
+@calendarSelectedHoverColor:   #008BB6;
+@weekendColor:                 @textColorOrange;
+@weekendBackgroundColor:       #F2F2F2;
+@weekColor:                    @textColorGrayLight;
+@weekofyearColor:              #FFFFFF;
+@weekofyearBackgroundColor:    #636363;
+
+
+@popupBorderColor:             @baseBorderColor;
+@popupBackgroundColor:         @baseBackgroundColor;
+@popupGradientStart:           @baseBackgroundColor;
+@popupGradientEnd:             #F5F5F5;
+
+
+@groupGradientStart:           #FFFFFF;
+@groupGradientEnd:             #E9F2FB;
+
+
+@pagingColor:                  @textColorBlue;
+@pagingSelectedColor:          @textColorGrayDark;
+@pagingBorderColor:            @baseBorderColor;
+@pagingActiveBorderColor:      #A9A9A9;
+@pagingBackgroundColor:        #FAFAFA;
+@pagingSelectedBackgroundColor:#E6E6E6;
+
+
+@sliderBorderColor:            @baseBorderColor;
+@sliderActiveBorderColor:      #838383;
+
+
+@errorboxColor:                #990000;
+@errorboxBorderColor:          #990000;
+@errorboxBackgroundColor:      #FFEEEE;
+
+
+@notificationInfoColor:        rgba(33, 155, 166, 0.88);
+@notificationWarningColor:     rgba(234, 67, 23, 0.88);
+@notificationErrorColor:       rgba(190, 0, 5, 0.88);
+@notificationArrowColor:       rgba(51, 51, 51, 0.9);
+@notificationInfoColorIE8:     rgb(33, 155, 166);
+@notificationWarningColorIE8:  rgb(234, 67, 23);
+@notificationErrorColorIE8:    rgb(190, 0, 5);
+@notificationArrowColorIE8:    rgb(51, 51, 51);
+
+
+@progressmeterGradientStart:   #E8F6FD;
+@progressmeterGradientEnd:     #C6E9FA;
+
+
+@windowBorderColor:            #9C9C9C;
+@windowBackgroundColor:        #D9E5EF;
+@windowFramePadding:           4px;
+
+
+@tabSelectedBackgroundColor:   #FFFFFF;
+
+
+@panelBorderColor:             #9C9C9C;
+@panelBackgroundColor:         #E1EDF4;
+@panelBodyBackground:          #F0F6F9;
+
+
+@menuImageSize:                16px;
+@menuActiveBorderColorTR:      #838383;
+@menuActiveBorderColorBL:      #B6B6B6;
+@menuPopupBackground:          #FAFAFA;
+@menuSeparatorBorderColor:     #838383;
+@menuSeparatorBackgroundColor: #B8B8B8;
+@menuPopupSeparatorBorder:     #FFFFFF;
+@menuPopupSeparatorBackground: #E0E0E0;
+
+
+@navImageSize:                 16px;
+@navColor:                     #333333;
+@navBorderColor:               #F4F4F3;
+@navBackgroundColor:           #FFFFFF;
+@navHoverBackgroundColor:      #E8E8E8;
+@navSelectedColor:             #FFFFFF;
+@navSelectedBackgroundColor:   #372F2B;
+@navSeparatorColor:            #838383;
+@navCollapsedWidth:            32px;
+
+
+@colorboxBorderColor:          #9C9C9C;
+
+
+@chosenboxItemBorderColor:     #B3B3B3;
+@chosenboxCreateIconColor:     @textColorGreen;
+
+
+@biglistboxBackgroundColor:    #F0F0F0;
+@biglistboxFrozenBackground:   #E0E0E0;
+
+
+@meshBackgroundColorIE8:              #F5F5F5;
+@meshHoverBackgroundColorIE8:         #E5F7FF;
+@meshSelectedBackgroundColorIE8:      #E5F7FF;
+@meshSelectedHoverBackgroundColorIE8: #D9F2FF;
+@meshGroupBackgroundColorIE8:         #EDF6FF;
+@meshGroupFooterBackgroundColorIE8:   #F2F9FF;
+

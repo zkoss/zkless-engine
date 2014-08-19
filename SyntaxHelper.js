@@ -65,7 +65,7 @@ module.exports = {
 		}
 	},
 
-	encodeDsp: function(data, theme, classpath) {
+	encodeDsp: function(data, theme, importpath) {
 		data = this.fixSyntaxIssue(data);
 		var importRe = new RegExp("@import[\\s]{1,}[\"']{1}~./[\\w/.]{1,}[\"']{1}[;]{1}"),
 			escapeRe = new RegExp("@\\{([^\\}]+)\\}"),
@@ -91,15 +91,13 @@ module.exports = {
 					var quoteIndex = sub.indexOf('~'),
 						quote = sub.substring(quoteIndex - 1, quoteIndex),
 						re = new RegExp("[\"']{1}~./"),
-						//handle special case when import dir is in zkmax
-						dir = sub.indexOf('/zkmax/less/') < 0 ? classpath.replace('src', 'codegen') : '../../zkcml/zkmax/codegen/archive',
-						newStr = quote + dir + '/web/';
+						newStr = quote + importpath + '/web/';
 					sub = sub.replace(re, newStr);
 					dataArray[i] = current.substring(0, start) + sub + current.substring(end + 1);
 				}
 
 				if (current.indexOf('@import "classpath:web') >= 0) {
-					dataArray[i] = current.replace('classpath:web/', classpath.replace('src', 'codegen') + '/web/');
+					dataArray[i] = current.replace('classpath:web/', importpath + '/web/');
 				}
 
 				//2. escape like @{variable}

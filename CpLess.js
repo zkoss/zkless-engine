@@ -1,13 +1,14 @@
 
 const srcDir = process.argv[2];
 const destDir = process.argv[3];
-const classpath = process.argv[4];
-const theme = process.argv[5] ? process.argv[5] : '';
+const theme = process.argv[4] ? process.argv[4] : '';
+const genDir = 'codegen/archive/';
 
 (function() {
 	var walk = require('walk'),
 		mkpath = require('./mkpath'),
-		fs = require('fs'),	
+		fs = require('fs'),
+		ncp = require('ncp').ncp;
 		compiler = require('./LessEngine'),
 		helper = require('./SyntaxHelper'),
 		S = require('string'),
@@ -15,11 +16,17 @@ const theme = process.argv[5] ? process.argv[5] : '';
 		imports = [],
 		targets = [],
 		current = '',
-		walker = walk.walk(srcDir, {followLinks: false});
+		path = require('path'),
+		appDir = path.dirname(require.main.filename),
+		walker = walk.walk(srcDir, {followLinks: false}),
+		importloc = appDir + '/encoded/web';
+
+	copyImports();
 
 	walker.on('file', function(root, stat, next) {
-		if (S(stat.name).endsWith('.less'))
+		if (S(stat.name).endsWith('.less')) {
 			files.push(root + '/' + stat.name);
+		}
 		next();
 	});
 
@@ -37,7 +44,6 @@ const theme = process.argv[5] ? process.argv[5] : '';
 				targets.push(fp);
 			}
 		}
-
 		encodeImports();
 	});
 
@@ -48,37 +54,43 @@ const theme = process.argv[5] ? process.argv[5] : '';
 		for (var i = 0; i < imports.length; i++) {
 			var cf = imports[i],
 				data = fs.readFileSync(cf, 'utf-8');
-
 			if (data) {
-				data = helper.encodeDsp(data, '', classpath);
-				var dst = cf.replace(srcDir, destDir);
-				mkpath.sync(dst.substring(0, dst.lastIndexOf('/')), 0700);
-				fs.writeFileSync(dst, data);
+				data = helper.encodeDsp(data, '', genDir);
+				if (S(cf).contains('web')) {
+					var tempPath = genDir + cf.substring(cf.indexOf('web'));
+				}
+				mkpath.sync(tempPath.substring(0, tempPath.lastIndexOf('/')), 0700);
+				fs.writeFileSync(tempPath, data);
 			}
 		}
 		lessCompile();
 	}
 
 	function lessCompile() {
-		var last = targets[targets.length -1].replace(destDir, srcDir);
+		var last = targets[targets.length -1];
 		for (var i = 0; i < targets.length; i++) {
-			var cp = targets[i].replace(destDir, srcDir);
+			var cp = targets[i];
 			console.log('compiling: ' + cp);
-			compiler.compile(cp, classpath, theme, function(css, path) {
-				//replace folder name
-				var newPath = path.replace(srcDir, destDir).replace('/less', '/css');
-				// replace theme foder name
+			compiler.compile(cp, genDir, theme, function(css, path) {
+				//replace path from src to dest
+				var newPath = path.replace(srcDir, destDir).replace('/less', '/css').replace('.less', '.css.dsp.src');
 				if(theme) {
 					newPath = newPath.replace('/web', '/web/' + theme);
 				}
-				//replace file sub-name for source file
-				var dspSrcPath = newPath.replace('.less', '.css.dsp.src');
-				mkpath.sync(dspSrcPath.substring(0, dspSrcPath.lastIndexOf('/')), 0700);
-				fs.writeFile(dspSrcPath, css, function(err) {
-					if (err)
-						throw err;
-				});
+				mkpath.sync(newPath.substring(0, newPath.lastIndexOf('/')), 0700);
+				fs.writeFileSync(newPath, css);
 			});	
 		}
+	}
+
+	function copyImports() {
+		ncp.limit = 16;
+
+		mkpath.sync(genDir, 0700);
+		ncp(importloc, genDir + 'web', function(err) {
+			if (err) {
+				throw err
+			}
+		});
 	}
 })();
