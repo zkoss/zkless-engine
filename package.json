@@ -10,6 +10,9 @@
     "walk": "^2.3.3"
   },
   "devDependencies": {},
+  "bin": {
+    "zklessc": "./bin/zklessc"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
