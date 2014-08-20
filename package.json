@@ -11,7 +11,8 @@
   },
   "devDependencies": {},
   "bin": {
-    "zklessc": "./bin/zklessc"
+    "zklessc": "./bin/zklessc",
+    "zklessroot": "./bin/zklessroot"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
