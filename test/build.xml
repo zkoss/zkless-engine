@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<project name="less.compile" default="lessc" basedir=".">
+	<target name="lessc">
+		<exec executable="node">
+			<!-- location of the file CpLess -->
+			<arg value="${basedir}/node_modules/zkless-engine/lib/CpLess.js" />
+			<!-- input folder that contains less file -->
+			<arg value="${basedir}/src/main/webapp"/>
+			<!-- output folder -->
+            <arg value="${basedir}/src/main/webapp"/>
+            <!-- [optional] zul jar path -->
+            <arg value="${basedir}/lib/zul.jar"/>
+            <!-- [optional] zkmax jar path -->
+            <arg value="${basedir}/lib/zkmax.jar"/>
+		</exec>
+		<!-- remove the temp dir after less is compiled -->
+		<exec executable="rm">
+			<arg value="-rf" />
+			<arg value="${basedir}/temp" />
+		</exec>
+		<java classname="CompressCss" fork="true">
+			<!-- input folder (same as above) -->
+			<arg value="${basedir}/src/main/webapp"/>
+			<!-- output folder (same as above) -->
+			<arg value="${basedir}/src/main/webapp"/>
+			<classpath>
+				<!-- required jars -->
+				<pathelement location="${basedir}/lib/zkjszips.jar"/>
+			    <pathelement location="${basedir}/lib/yuicompressor.jar"/>
+				<pathelement location="${basedir}/lib/commons-io.jar"/>
+				<pathelement location="${basedir}/lib/CssCompressor.jar"/>
+			</classpath>
+		</java>
+	</target>
+</project>
