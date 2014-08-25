@@ -4,8 +4,6 @@
  *  This code was copied from lessjs's source code in bin/lessc
  *
  */
-
-console.log('new!');
 var path = require('path'),
     fs = require('../node_modules/less/lib/less/fs'),
     os = require('os'),
