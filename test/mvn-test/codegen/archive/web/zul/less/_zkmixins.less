@@ -1,0 +1,152 @@
+
+
+
+
+
+
+
+
+.encodeURL(@property, @url, @rest...) when (@property = background) {
+background: ~"url(__EL__c__ELSP__encodeURL('@{url}')__ELEND__)" @rest;
+}
+.encodeURL(@property, @url, @rest...) when (@property = background-image) {
+background-image: ~"url(__EL__c__ELSP__encodeURL('@{url}')__ELEND__)";
+}
+.encodeThemeURL(@property, @url, @rest...) when (@property = background) {
+background: ~"url(__EL__c__ELSP__encodeThemeURL('@{url}')__ELEND__)" @rest;
+}
+.encodeThemeURL(@property, @url, @rest...) when (@property = background-image) {
+background-image: ~"url(__EL__c__ELSP__encodeThemeURL('@{url}')__ELEND__)";
+}
+.encodeURL-horGradient(@url, @start, @end) {
+background: ~"url(__EL__c__ELSP__encodeURL('@{url}')__ELEND__)", __EL__t__ELSP__gradValue('hor', '@{start} 0%; @{end} 100%')__ELEND__;
+}
+.encodeURL-verGradient(@url, @start, @end) {
+background: ~"url(__EL__c__ELSP__encodeURL('@{url}')__ELEND__)", __EL__t__ELSP__gradValue('ver', '@{start} 0%; @{end} 100%')__ELEND__;
+}
+
+
+
+
+.gradient(@direction, @value) {
+__faker___:__EL__t__ELSP__gradient('@{direction}', '@{value}')__ELEND__;
+}
+.gradValue(@direction, @value) {
+background: __EL__t__ELSP__gradValue('@{direction}', '@{value}')__ELEND__;
+}
+.gradients(@direction, @value) {
+__faker___:__EL__t__ELSP__gradients('@{direction}', '@{value}')__ELEND__;
+}
+
+.box(@name, @value) {
+__faker___:__EL__t__ELSP__box('@{name}', '@{value}')__ELEND__;
+}
+.box2(@name, @value, @name2, @value2) {
+__faker___:__EL__t__ELSP__box2('@{name}', '@{value}', '@{name2}', '@{value2}')__ELEND__;
+}
+.box3(@name, @value, @name2, @value2, @name3, @value3) {
+__faker___:__EL__t__ELSP__box3('@{name}', '@{value}', '@{name2}', '@{value2}', '@{name3}', '@{value3}')__ELEND__;
+}
+
+.boxShadow(@value) {
+__faker___:__EL__t__ELSP__boxShadow('@{value}')__ELEND__;
+}
+
+.borderRadius(@size) {
+__faker___:__EL__t__ELSP__borderRadius('@{size}')__ELEND__;
+}
+
+.transform(@value) {
+__faker___:__EL__t__ELSP__transform('@{value}')__ELEND__;
+}
+
+.applyCSS3(@key, @value) {
+__faker___:__EL__t__ELSP__applyCSS3('@{key}', '@{value}')__ELEND__;
+}
+
+
+
+
+
+.horGradient(@start, @end) when (@start = @end) {
+background: @start;
+}
+.horGradient(@start, @end) when not (@start = @end) {
+__faker___:__EL__t__ELSP__gradient('hor', '@{start} 0%; @{end} 100%')__ELEND__;
+}
+.verGradient(@start, @end) when (@start = @end) {
+background: @start;
+}
+.verGradient(@start, @end) when not (@start = @end) {
+__faker___:__EL__t__ELSP__gradient('ver', '@{start} 0%; @{end} 100%')__ELEND__;
+}
+.gradientFallback(@start, @end) {
+background: average(@start, @end);
+}
+.resetGradient() {
+background: none;
+filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+
+.topBorderRadius(@size) {
+__faker___:__EL__t__ELSP__borderRadius('@{size} @{size} 0 0')__ELEND__;
+}
+.rightBorderRadius(@size) {
+__faker___:__EL__t__ELSP__borderRadius('0 @{size} @{size} 0')__ELEND__;
+}
+.bottomBorderRadius(@size) {
+__faker___:__EL__t__ELSP__borderRadius('0 0 @{size} @{size}')__ELEND__;
+}
+.leftBorderRadius(@size) {
+__faker___:__EL__t__ELSP__borderRadius('@{size} 0 0 @{size}')__ELEND__;
+}
+
+
+.transition(@property, @duration, @timingFunc, @delay: 0) {
+__faker___:__EL__t__ELSP__applyCSS3('transition', '@{property} @{duration} @{timingFunc} @{delay}')__ELEND__;
+}
+
+
+.opacity(@opacity) {
+opacity: @opacity;
+@opacity100: @opacity * 100;
+filter: ~"alpha(opacity=@{opacity100})";
+}
+
+
+.baseIconFont() {
+display: inline-block;
+font-family: FontAwesome;
+font-weight: normal;
+font-style: normal;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+
+.size(@width, @height) {
+width: @width;
+height: @height;
+}
+.displaySize(@display, @width, @height) {
+display: @display;
+.size(@width, @height);
+}
+.fontStyle(@family, @size, @weight, @color) {
+font-family: @family;
+font-size: @size;
+font-weight: @weight;
+font-style: normal;
+color: @color;
+}
+.fontStyle(@family, @size, @weight) {
+font-family: @family;
+font-size: @size;
+font-weight: @weight;
+font-style: normal;
+}
+.iconFontStyle(@size, @color) {
+font-size: @size;
+color: @color;
+}

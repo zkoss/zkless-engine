@@ -1,0 +1,42 @@
+<%@ taglib uri="http://www.zkoss.org/dsp/web/theme" prefix="t" %>
+
+@import "~./zul/less/_zkvariables.less";
+@import "~./zul/less/_zkmixins.less";
+
+@base: #f938ab;
+@test: pink;
+
+.box-shadow(@style, @c) when (iscolor(@c)) {
+  -webkit-box-shadow: @style @c;
+  box-shadow:         @style @c;
+}
+.box-shadow(@style, @alpha: 50%) when (isnumber(@alpha)) {
+  .box-shadow(@style, rgba(0, 0, 0, @alpha));
+}
+
+.box {
+  color: saturate(@base, 5%);
+  border-color: lighten(@base, 30%);
+  div { .box-shadow(0 0 5px, 30%) }
+}
+
+.test {
+	${t:gradient('ver', '#FFFFFF 0%; #EEEEEE 100%')};
+}
+
+.test {
+    .gradient('ver', '#333333 0%; #555555 50%; #666666 100%');
+}
+
+.demo {
+	background-color: @base;
+}
+
+.test1 {
+	background-color: @test;
+	color: @textColorGrayDark;
+}
+
+.test2 {
+	background-color: @base;
+}

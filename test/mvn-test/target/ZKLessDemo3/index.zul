@@ -1,0 +1,13 @@
+<?link rel="stylesheet" href="./less/simple.less"?>
+<zk>
+	<window apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('org.zkoss.ZKLessDemo3.MyViewModel')"
+		validationMessages="@id('vmsgs')">
+		<hlayout>count: <label value="@load(vm.count)" /></hlayout>
+		<button label="add" onClick="@command('cmd')"/>
+		<div sclass="test">
+			<label sclass="test1" value="I am test 1" />
+			<label sclass="test2" value="I am test 2" />
+		</div>
+	</window>
+</zk>

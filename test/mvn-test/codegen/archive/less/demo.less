@@ -1,0 +1,107 @@
+@import "C:/home/Han/workspace_tasks/ZKLessDemo3/codegen/archive/web/zul/less/_zkmixins.less";
+
+
+@base: #f938ab;
+
+.box-shadow(@style, @c) when (iscolor(@c)) {
+-webkit-box-shadow: @style @c;
+box-shadow:         @style @c;
+}
+.box-shadow(@style, @alpha: 50%) when (isnumber(@alpha)) {
+.box-shadow(@style, rgba(0, 0, 0, @alpha));
+}
+.box {
+color: saturate(@base, 5%);
+border-color: lighten(@base, 30%);
+div { .box-shadow(0 0 5px, 30%) }
+}
+
+.myDiv {
+background: __EL__c__ELSP__encodeURL('~./path/to/image.png')__ELEND__;
+}
+
+.myDiv {
+background: __EL__c__ELSP__encodeThemeURL('~./path/to/image.png')__ELEND__;
+}
+
+.myDiv {
+background: rgba(200, 200, 200, 0.8);
+/*__TAGLIB <c:if test="__EL__zk.ie <= 8__ELEND__"> TAGLIB__*/
+
+background: rgb(200, 200, 200);
+/*__TAGLIB </c:if> TAGLIB__*/
+}
+
+.myDiv {
+__faker___:__EL__t__ELSP__applyCSS3('transition-property', 'opacity')__ELEND__;
+__faker___:__EL__t__ELSP__applyCSS3('transition-duration', '350ms')__ELEND__;
+}
+
+.myDiv {
+__faker___:__EL__t__ELSP__transform('translate3d(0, 0, 0)')__ELEND__;
+}
+
+.myDiv {
+__faker___:__EL__t__ELSP__boxShadow('1px 1px 0 rgba(0, 0, 0, 0.2)')__ELEND__;
+}
+
+.myDiv1 {
+__faker___:__EL__t__ELSP__box('box-flex', '1')__ELEND__;
+}
+.myDiv2 {
+__faker___:__EL__t__ELSP__box2('box-flex', '1', 'box-orient', 'horizontal')__ELEND__;
+}
+.myDiv3 {
+__faker___:__EL__t__ELSP__box3('box-flex', '1', 'box-orient', 'horizontal', 'box-pack', 'center')__ELEND__;
+}
+
+.myDiv {
+__faker___:__EL__t__ELSP__gradient('ver', '#FFFFFF 0%; #EEEEEE 100%')__ELEND__;
+}
+
+.z-component1 {
+.encodeURL(background-image, '~./path/to/image1.png');
+}
+.z-component2 {
+.encodeThemeURL(background-image, '~./path/to/image2.png');
+}
+.z-component3 {
+.encodeThemeURL(background, '~./path/to/image3.png', center center);
+}
+
+.z-component1 {
+.gradient('ver', '#333333 0%; #555555 50%; #666666 100%');
+}
+.z-component2 {
+.horGradient(#333333, #666666);
+}
+.z-component3 {
+.verGradient(#333333, #666666);
+}
+.ie8 .z-component4 {
+.gradientFallback(#333333, #666666);
+}
+.z-component1:hover {
+.resetGradient();
+background: #777777;
+}
+
+.z-component1 {
+.borderRadius(3px);
+}
+.z-component2 {
+.topBorderRadius(3px);
+}
+.z-component3 {
+.rightBorderRadius(3px);
+}
+.z-component4 {
+.bottomBorderRadius(3px);
+}
+.z-component5 {
+.leftBorderRadius(3px);
+}
+
+.z-component {
+.boxShadow(inset 1px 1px 0 #222222);
+}
