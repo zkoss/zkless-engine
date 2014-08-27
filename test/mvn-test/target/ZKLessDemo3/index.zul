@@ -7,7 +7,7 @@
 		<button label="add" onClick="@command('cmd')"/>
 		<div sclass="test">
 			<label sclass="test1" value="I am test 1" />
-			<label sclass="test2" value="I am test 2" />
+			<label sclass="test1" value="I am test 2" />
 		</div>
 	</window>
 </zk>

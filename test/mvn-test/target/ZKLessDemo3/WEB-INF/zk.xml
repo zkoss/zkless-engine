@@ -11,6 +11,6 @@
 	-->
 	<library-property>
 	    <name>org.zkoss.theme.preferred</name>
-	    <value>sapphire</value> <!-- or silvertail, atlantic -->
+	    <value>atlantic</value> <!-- or silvertail, atlantic -->
 	</library-property>
 </zk>
