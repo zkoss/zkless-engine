@@ -1,6 +1,6 @@
 {
   "name": "zkless-engine",
-  "version": "0.1.16",
+  "version": "0.1.19",
   "description": "To compile LESS files into *.css.dsp using lesscss-engine",
   "main": "CpLess.js",
   "dependencies": {
@@ -8,7 +8,6 @@
     "less": "^1.7.4",
     "node-dir": "^0.1.6",
     "rimraf": "^2.2.8",
-    "string": "^1.9.1",
     "walk": "^2.3.3"
   },
   "devDependencies": {},
