@@ -1,11 +1,11 @@
 {
   "name": "zkless-engine",
-  "version": "0.1.19",
+  "version": "0.1.21",
   "description": "To compile LESS files into *.css.dsp using lesscss-engine",
   "main": "CpLess.js",
   "dependencies": {
     "adm-zip": "^0.4.4",
-    "less": "^1.7.4",
+    "less": "^3.8.1",
     "node-dir": "^0.1.6",
     "rimraf": "^2.2.8",
     "walk": "^2.3.3"
@@ -16,7 +16,7 @@
     "zklessc": "./bin/zklessc"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cd test; ant"
   },
   "repository": {
     "type": "git",

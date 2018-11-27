@@ -3,7 +3,7 @@
 	<target name="lessc">
 		<exec executable="node">
 			<!-- location of the file CpLess -->
-			<arg value="${basedir}/node_modules/zkless-engine/lib/CpLess.js" />
+			<arg value="${basedir}/../lib/CpLess.js" />
 			<!-- input folder that contains less file -->
 			<arg value="${basedir}/src/main/webapp"/>
 			<!-- output folder -->

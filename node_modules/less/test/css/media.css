@@ -119,7 +119,6 @@
   }
   @page :first {
     size: 8.5in 11in;
-    
     @top-left {
       margin: 1cm;
     }
@@ -215,5 +214,10 @@ body {
 @media all and tv {
   .all-and-tv-variables {
     var: all-and-tv;
+  }
+}
+@media screen and (min-width: 61px) {
+  .selector {
+    foo: bar;
   }
 }
