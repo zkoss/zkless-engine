@@ -8,6 +8,11 @@ const less = require('less');
 const cwdRelative = p => path.relative(process.cwd(), p);
 const filterEmpty = array => array.filter(Boolean);
 
+function ignoreNonLessFiles(path, stats) {
+    if (!stats) { return false; }
+    return !(stats.isDirectory() || path.endsWith('.less'));
+}
+
 function compileFile(sourcePath, sourceDir, outputDir, options) {
     const relativeSourcePath = path.relative(sourceDir, sourcePath);
     if (path.basename(sourcePath)[0] === '_') {
@@ -35,8 +40,8 @@ function build(sourceDir, outputDir, lessOptions) {
     const tasks = [];
     const errors = [];
     return new Promise((resolve, reject) => {
-        const watcher = chokidar.watch(path.join(sourceDir, '**', '*.less'),
-            { ignoreInitial: false, persistent: false })
+        const watcher = chokidar.watch((sourceDir),
+            { ignored: ignoreNonLessFiles, ignoreInitial: false, persistent: false })
             .on('add', path => {
                 tasks.push(compileFile(path, sourceDir, outputDir, lessOptions)
                     .catch(err => errors.push(err)));
@@ -109,17 +114,13 @@ function buildContinuous(sourceDir, importDirs, outputDir, lessOptions, compileR
         importingLessFilesFor(sourcePath).forEach(handleFileUpdate);
     }
 
-    const lessFilesBelow = dir => path.join(dir, '**', '*.less');
-
-    const watcher = chokidar.watch(lessFilesBelow(sourceDir),
-        { ignoreInitial: true, persistent: true })
+    const watcher = chokidar.watch(sourceDir,
+        { ignoreInitial: true, persistent: true, ignored: ignoreNonLessFiles })
         .on('add', path => handleFileUpdate(path))
         .on('change', path => handleFileUpdate(path))
         .on('unlink', path => handleFileDelete(path));
 
-    lessOptions.paths && lessOptions.paths.forEach(
-        importPath => watcher.add(lessFilesBelow(importPath))
-    );
+    importDirs && importDirs.forEach(importDir => watcher.add(importDir));
 }
 
 function reportErrors(errors) {
