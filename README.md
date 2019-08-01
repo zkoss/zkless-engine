@@ -43,7 +43,7 @@ Compile a custom zktheme cloned from [zk theme template project](https://github.
 
 ### Include external folders into build 
 
-See [less inlude paths](http://lesscss.org/usage/#less-options-include-paths)
+See [less include paths](http://lesscss.org/usage/#less-options-include-paths)
 
 Assume the folder structure:
 ```
