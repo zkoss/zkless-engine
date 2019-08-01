@@ -25,6 +25,7 @@ Requires node >=10.16
 | `-w/--watch`    | watch files after successful compile            | false (optional)        |
 | `-c/--compress` | watch files after successful compile            | false (optional)        |
 | `-i/--imports`  | specify multiple folders for @import resolution | - (optional/multiple)   |
+| `--less-opts`   | json string with custom [less options](http://lesscss.org/usage/#less-options)  | {}                      |
 
 ## Examples
 
@@ -45,23 +46,24 @@ Compile a custom zktheme cloned from [zk theme template project](https://github.
 See [less inlude paths](http://lesscss.org/usage/#less-options-include-paths)
 
 Assume the folder structure:
-    
-    root
-    - mytheme 
-      - src/archive/web/js/zul/wgt/button/less
-        - button.less
-        - _mybutton.less
-    - 3rdparty
-      - amazingtool
-        - shapes.less
-    - styleguide
-      - corporatecolors.less
+```
+root
+- mytheme 
+  - src/archive/web/js/zul/wgt/button/less
+    - button.less
+    - _mybutton.less
+- 3rdparty
+  - amazingtool
+    - shapes.less
+- styleguide
+  - corporatecolors.less
+```
 
-By executing the command
+By executing the command ...
 
     zklessc -s src/archive/web -o target/classes/web/mytheme -i ../3rdparty -i ../styleguide
 
-Less will search @imports based on those folders as well (using the --inlcude)
+... less will find @imports based on those folders as well
 
 button.less
 ```less
@@ -70,11 +72,18 @@ button.less
 /*your imports*/
 @import "_mybutton.less"; /*relative import*/
 ```
+
 _mybutton.less
-```
+```less
 @import "/amazingtool/shapes.less" /*will be found below "-i ../3rdparty"*/
 @import "/corporatecolors.less" /*will be found below "-i ../styleguide"*/
+/*my styles*/
 
+.z-button {
+    color: @corporateGreen; /* using a variable from corporatecolors.less */
+    .amazing-shape-rounded(10px);
+}
+```
 
 ### Maven integration
 
