@@ -1,0 +1,16 @@
+@import "_import.less";
+@import "/ext1.less";
+@import "/sub2/ext2.less";
+
+.mainstyle {
+    content: 'mainstylecontent';
+    color: @importedcolor;
+}
+
+.ext1 {
+    content: @ext1content;
+}
+
+.ext2 {
+    content: @ext2content;
+}

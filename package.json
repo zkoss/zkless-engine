@@ -1,16 +1,21 @@
 {
   "name": "zkless-engine",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Compile ZK Themes using less.",
   "main": "./src/index.js",
   "bin": {
     "zklessc": "./bin/zkless-cli.js"
   },
+  "files": [
+    "src/",
+    "bin/"
+  ],
   "engines": {
     "node": ">= 10.16"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "test-dev": "mocha --watch"
   },
   "repository": {
     "type": "git",
@@ -33,5 +38,8 @@
     "fs-extra": "^8.1.0",
     "less": "^3.9.0",
     "minimist": "^1.2.0"
+  },
+  "devDependencies": {
+    "mocha": "^6.2.0"
   }
 }

@@ -32,7 +32,7 @@ function compileFile(sourcePath, sourceDir, outputDir, options) {
         .then(output => {
             fse.ensureFileSync(outputPath);
             fse.writeFile(outputPath, output.css);
-            return { sourcePath, output };
+            return { sourcePath, output, outputPath };
         });
 }
 
@@ -157,4 +157,3 @@ module.exports = function(sourceDir, outputDir, options) {
             throw {message: 'zkless compliation failed', details: errors};
         });
 };
-
