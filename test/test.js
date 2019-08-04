@@ -10,19 +10,19 @@ const tempOutputDir = path.resolve(__dirname, 'tempOutput/');
 const ext1Dir = path.resolve(__dirname, 'testFiles/ext1');
 const ext2Dir = path.resolve(__dirname, 'testFiles/ext2');
 const importDirs = [ext1Dir, ext2Dir];
-const lessOptions =  {paths: [theme1Dir, ...importDirs]};
+const lessOptions = { paths: [theme1Dir, ...importDirs] };
 
-describe('src/index.js', function() {
-  describe('zklessCompile', function() {
-    it('should compile 2 files', function(done) {
-      zklessCompile(theme1Dir, tempOutputDir, {importDirs, lessOptions})
+describe('src/index.js', function () {
+  describe('zklessCompile', function () {
+    it('should compile 2 files', function (done) {
+      zklessCompile(theme1Dir, tempOutputDir, { importDirs, extension: '.css.dsp', lessOptions })
         .then(results => {
           assert(results.length == 2);
           const resultsByOutputPath = {};
           results.forEach(result => {
             resultsByOutputPath[path.relative(tempOutputDir, result.outputPath)] = result.output;
           });
-          
+
           const mainResult = resultsByOutputPath['main.css.dsp'];
           const subSubResult = resultsByOutputPath['sub/sub.css.dsp'];
 

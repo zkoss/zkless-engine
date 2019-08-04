@@ -4,6 +4,7 @@ const path = require('path');
 const fse = require('fs-extra');
 const chokidar = require('chokidar');
 const less = require('less');
+const liveReload = require('./liveReload.js');
 
 const cwdRelative = p => path.relative(process.cwd(), p);
 const filterEmpty = array => array.filter(Boolean);
@@ -13,7 +14,7 @@ function ignoreNonLessFiles(path, stats) {
     return !(stats.isDirectory() || path.endsWith('.less'));
 }
 
-function compileFile(sourcePath, sourceDir, outputDir, options) {
+function compileFile(sourcePath, sourceDir, outputDir, extension, lessOptions) {
     const relativeSourcePath = path.relative(sourceDir, sourcePath);
     if (path.basename(sourcePath)[0] === '_') {
         console.log('skip file...', cwdRelative(sourcePath));
@@ -22,13 +23,13 @@ function compileFile(sourcePath, sourceDir, outputDir, options) {
     const outputPath = path.resolve(
         outputDir,
         relativeSourcePath
-            .replace('.less', '.css.dsp')
+            .replace('.less', extension)
             .replace(/([\/\\\\])less([\/\\\\])/, '$1css$2'));
 
     console.log('compiling...', cwdRelative(sourcePath), '->', cwdRelative(outputPath));
     return fse.readFile(sourcePath, 'utf8')
         .then(lessInput => lessInput.replace(/(@import\s+['"])~\.\//g, '$1/'))
-        .then(lessInput => less.render(lessInput, { ...options, filename: sourcePath }))
+        .then(lessInput => less.render(lessInput, { ...lessOptions, filename: sourcePath }))
         .then(output => {
             fse.ensureFileSync(outputPath);
             fse.writeFile(outputPath, output.css);
@@ -36,14 +37,15 @@ function compileFile(sourcePath, sourceDir, outputDir, options) {
         });
 }
 
-function build(sourceDir, outputDir, lessOptions) {
+function build(sourceDir, outputDir, options) {
+    const { extension, lessOptions } = options;
     const tasks = [];
     const errors = [];
     return new Promise((resolve, reject) => {
         const watcher = chokidar.watch((sourceDir),
             { ignored: ignoreNonLessFiles, ignoreInitial: false, persistent: false })
             .on('add', path => {
-                tasks.push(compileFile(path, sourceDir, outputDir, lessOptions)
+                tasks.push(compileFile(path, sourceDir, outputDir, extension, lessOptions)
                     .catch(err => errors.push(err)));
             })
             .on('ready', () => {
@@ -56,7 +58,8 @@ function build(sourceDir, outputDir, lessOptions) {
     });
 }
 
-function buildContinuous(sourceDir, importDirs, outputDir, lessOptions, compileResults) {
+function buildContinuous(sourceDir, outputDir, options, compileResults) {
+    const { importDirs, extension, lessOptions } = options;
     console.log('watching source dir for changes')
     console.log(' ', cwdRelative(sourceDir));
     if (importDirs && importDirs.length > 0) {
@@ -65,6 +68,8 @@ function buildContinuous(sourceDir, importDirs, outputDir, lessOptions, compileR
     }
 
     console.log('press CTRL-C to exit')
+
+    const notifyLifeUpdate = liveReload(4444, "zkless-success");
 
     const lessImports = {};
     const updateLessImports = res => {
@@ -90,7 +95,7 @@ function buildContinuous(sourceDir, importDirs, outputDir, lessOptions, compileR
 
         const compileAndUpdate = srcPath => {
             if (srcPath.startsWith(sourceDir)) {
-                return compileFile(srcPath, sourceDir, outputDir, lessOptions)
+                return compileFile(srcPath, sourceDir, outputDir, extension, lessOptions)
                     .then(updateLessImports)
                     .catch(err => errors.push(err));
             }
@@ -102,8 +107,10 @@ function buildContinuous(sourceDir, importDirs, outputDir, lessOptions, compileR
                 const duration = (process.uptime() - start).toFixed(2);
                 if (errors.length === 0) {
                     console.log(`success: compiled ${filterEmpty(results).length} file(s) (${duration} sec)`);
+                    notifyLifeUpdate("zkless-success");
                 } else {
                     reportErrors(errors);
+                    notifyLifeUpdate("zkless-failure");
                 }
             });
     }
@@ -125,35 +132,35 @@ function buildContinuous(sourceDir, importDirs, outputDir, lessOptions, compileR
 
 function reportErrors(errors) {
     console.error(errors);
-    if(Array.isArray(errors)) {
+    if (Array.isArray(errors)) {
         errors.forEach(err => {
             console.error(`${err.filename}: ${err.line}`);
-            console.error(err.toString({stylize: less.lesscHelper.stylize}));
+            console.error(err.toString({ stylize: less.lesscHelper.stylize }));
         });
         console.error(`failed with ${errors.length}: errors`);
     }
 }
 
-module.exports = function(sourceDir, outputDir, options) {
-    const {importDirs, watch, lessOptions} = options;
-    console.log({sourceDir, outputDir, importDirs, watch, lessOptions});
+module.exports = function (sourceDir, outputDir, options) {
+    console.log('Compiling with resolved params:');
+    console.log({ sourceDir, outputDir });
+    console.log('options:', options);
 
-
-    return build(sourceDir, outputDir, lessOptions)
+    return build(sourceDir, outputDir, options)
         .then(results => {
             const compileResults = filterEmpty(results);
             console.log(`success: compiled ${compileResults.length} file(s) (${process.uptime().toFixed(3)} sec)`);
             return compileResults;
         })
         .then(compileResults => {
-            if (watch) {
-                buildContinuous(sourceDir, importDirs, outputDir, lessOptions, compileResults);
+            if (options.watch) {
+                buildContinuous(sourceDir, outputDir, options, compileResults);
             } else {
                 return compileResults;
             }
         })
         .catch(errors => {
             reportErrors(errors);
-            throw {message: 'zkless compliation failed', details: errors};
+            throw { message: 'zkless compliation failed', details: errors };
         });
 };
