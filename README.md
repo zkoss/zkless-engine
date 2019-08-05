@@ -24,9 +24,9 @@ Requires node >=10.16
 | `-o/--output`   | output folder for .css.dsp files                | target/classes/web      |
 | `-c/--compress` | miniful output files                            | false (optional)        |
 | `-i/--imports`  | specify multiple folders for @import resolution | - (optional/multiple)   |
-| `--less-opts`   | json string with custom [less options](http://lesscss.org/usage/#less-options)  | {}                      |
+| `--less-opts`   | json string with custom [less options](http://lesscss.org/usage/#less-options)  | {} |
 | `-w/--watch`    | watch files after successful compile            | false (optional)        |
-| `--live-reload-port` | websocket port for live reloading          | 50000 (optional)        |
+| `--live-reload-port` | port for live reloading server             | 50000 (optional)        |
 
 ## Examples
 
@@ -161,10 +161,10 @@ When `--watch` is enabled an http server is automatically started on port 50000 
 By adding the following scripts to your zk application (zul page or globally) the page will be notified whenever the zkless due to file changes.
 
 ```html
-	<script src="http://localhost:50000/socket.io/socket.io.js"/>
-  <script src="http://localhost:50000/zklessLiveReloadStyles.js"/>
-  <!--<script src="http://localhost:50000/zklessLiveReloadStylesResize.js"/>-->
-	<!--<script src="http://localhost:50000/zklessLiveReloadPage.js"/>-->
+    <script src="http://localhost:50000/socket.io/socket.io.js"/>
+    <script src="http://localhost:50000/zklessLiveReloadStyles.js"/>
+    <!--<script src="http://localhost:50000/zklessLiveReloadStylesResize.js"/>-->
+    <!--<script src="http://localhost:50000/zklessLiveReloadPage.js"/>-->
 ```
 
 You have to add the socked.io client provided by the server.
