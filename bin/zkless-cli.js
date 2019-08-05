@@ -10,10 +10,11 @@ const argv = parseArgs(process.argv.slice(2), {
         'source': 'src/main/resources/web',
         'output': 'target/classes/web',
         'imports': [],
-        'watch': false,
         'compress': false,
         'extension': '.css.dsp',
-        'less-opts': '{}'
+        'less-opts': '{}',
+        'watch': false,
+        'live-reload-port': 50000
     }
 });
 delete argv.s;
@@ -29,15 +30,16 @@ console.log(argv);
 const sourceDir = path.resolve(argv.source);
 const outputDir = path.resolve(argv.output);
 const importDirs = [].concat(argv.imports).map(imp => path.resolve(imp));
-const watch = argv.watch;
 const extension = argv.extension;
 const lessOptions = {
     paths: [sourceDir, ...importDirs],
     compress: argv.compress,
     ...(JSON.parse(argv['less-opts']))
 };
+const watch = argv.watch;
+const liveReloadPort = argv['live-reload-port']
 
-zklessCompile(sourceDir, outputDir, { importDirs, watch, extension, lessOptions })
+zklessCompile(sourceDir, outputDir, { importDirs, extension, lessOptions, watch, liveReloadPort })
     .then(results => {
         if (!watch) console.log("zkless finished");
     })

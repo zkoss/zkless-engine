@@ -4,7 +4,7 @@ const path = require('path');
 const fse = require('fs-extra');
 const chokidar = require('chokidar');
 const less = require('less');
-const liveReload = require('./liveReload.js');
+const liveReload = require('./liveReload/liveReload.js');
 
 const cwdRelative = p => path.relative(process.cwd(), p);
 const filterEmpty = array => array.filter(Boolean);
@@ -59,7 +59,7 @@ function build(sourceDir, outputDir, options) {
 }
 
 function buildContinuous(sourceDir, outputDir, options, compileResults) {
-    const { importDirs, extension, lessOptions } = options;
+    const { importDirs, extension, lessOptions, liveReloadPort } = options;
     console.log('watching source dir for changes')
     console.log(' ', cwdRelative(sourceDir));
     if (importDirs && importDirs.length > 0) {
@@ -69,7 +69,7 @@ function buildContinuous(sourceDir, outputDir, options, compileResults) {
 
     console.log('press CTRL-C to exit')
 
-    const notifyLifeUpdate = liveReload(4444, "zkless-success");
+    const notifyLifeUpdate = liveReload(liveReloadPort, "zkless-success");
 
     const lessImports = {};
     const updateLessImports = res => {

@@ -1,5 +1,5 @@
 (function () {
-    var socket = io.connect('http://localhost:4444');
+    var socket = io.connect('http://localhost:{{port}}');
     socket.on("zkless-success", function () {
         window.location.reload();
     });
