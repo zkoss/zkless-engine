@@ -158,7 +158,7 @@ Call the same command from an [Exec](https://docs.gradle.org/current/dsl/org.gra
 
 When `--watch` is enabled an http server is automatically started on port 50000 (or `--live-reload-port`).
 
-By adding the following scripts to your zk application (zul page or globally) the page will be notified whenever the zkless due to file changes.
+By adding the following scripts to your zk application (zul page or globally) the page will be notified about zkless compile results.
 
 ```html
     <script src="http://localhost:50000/socket.io/socket.io.js"/>
@@ -167,7 +167,7 @@ By adding the following scripts to your zk application (zul page or globally) th
     <!--<script src="http://localhost:50000/zklessLiveReloadPage.js"/>-->
 ```
 
-You have to add the socked.io client provided by the server.
+You have to add the socked.io client script provided by the server.
 Besided that there are 3 options for different behaviour.
 
 ```zklessLiveReloadStyles.js``` -> reload only stylesheets after compliation
