@@ -132,7 +132,7 @@ e.g. run `zklessc` during the [process-resources phase](https://maven.apache.org
         <executable>zklessc</executable>
         <arguments>
           <argument>--source</argument>
-          <argument>${project.basedir}/src/archive</argument>
+          <argument>${project.basedir}/src/archive/web</argument>
           <argument>--output</argument>
           <argument>${project.build.outputDirectory}/web/${project.artifactId}</argument>
           <argument>--compress</argument>
