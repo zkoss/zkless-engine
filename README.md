@@ -160,7 +160,7 @@ When `--watch` is enabled an http server is automatically started on port 50000 
 
 By adding the following scripts to your zk application (zul page or globally) the page will be notified about zkless compile results.
 
-```html
+```
     <script src="http://localhost:50000/socket.io/socket.io.js"/>
     <script src="http://localhost:50000/zklessLiveReloadStyles.js"/>
     <!--<script src="http://localhost:50000/zklessLiveReloadStylesResize.js"/>-->
@@ -171,6 +171,8 @@ You have to add the socked.io client script provided by the server.
 Besided that there are 3 options for different behaviour.
 
 ```zklessLiveReloadStyles.js``` -> reload only stylesheets after compliation
+
 ```zklessLiveReloadStylesResize.js``` -> reload stylesheets and call zUtl.fireSized (useful when changing paddings/margins)
+
 ```zklessLiveReloadPage.js``` -> reload the whole page
 
