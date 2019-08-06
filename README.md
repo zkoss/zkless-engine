@@ -118,7 +118,7 @@ e.g. run `zklessc` during the [process-resources phase](https://maven.apache.org
     <plugin>
       <groupId>org.codehaus.mojo</groupId>
       <artifactId>exec-maven-plugin</artifactId>
-      <version>1.6</version>
+      <version>1.6.0</version>
       <executions>
         <execution>
           <id>compile-less</id>
