@@ -10,7 +10,6 @@ module.exports = function (port, initialMessage) {
     app.listen(port);
     function handler(req, res) {
         const templatePath = path.resolve(__dirname, 'templates', req.url.substring(1));
-        console.log(req.url, templatePath);
         fs.readFile(path.resolve(__dirname, 'templates', templatePath), 'utf8',
             function (err, liveReloadScript) {
                 if (err) {

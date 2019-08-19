@@ -14,20 +14,22 @@ const lessOptions = { paths: [theme1Dir, ...importDirs] };
 
 describe('src/index.js', function () {
   describe('zklessCompile', function () {
-    it('should compile 2 files', function (done) {
+    it('should compile 3 files', function (done) {
       zklessCompile(theme1Dir, tempOutputDir, { importDirs, extension: '.css.dsp', lessOptions })
         .then(results => {
-          assert(results.length == 2);
+          assert(results.length == 3);
           const resultsByOutputPath = {};
           results.forEach(result => {
             resultsByOutputPath[path.relative(tempOutputDir, result.outputPath)] = result.output;
           });
 
           const mainResult = resultsByOutputPath['main.css.dsp'];
-          const subSubResult = resultsByOutputPath['sub/sub.css.dsp'];
+          const subSubResult = resultsByOutputPath['sub/sub.css.dsp'];          
+          const escapeResult = resultsByOutputPath['escape.css.dsp'];
 
           assert.equal(mainResult.css, ".mainstyle {\n  content: 'mainstylecontent';\n  color: red;\n}\n.ext1 {\n  content: 'ext1-content';\n}\n.ext2 {\n  content: 'ext2-content';\n}\n");
           assert.equal(subSubResult.css, '');
+          assert.equal(escapeResult.css, '/*something unquoted*/\n');
           fse.remove(tempOutputDir)
           done();
         })
