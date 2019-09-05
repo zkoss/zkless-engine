@@ -22,7 +22,7 @@ Requires node >=10.16
 | --------------- | ----------------------------------------------- | ----------------------- |
 | `-s/--source`   | source folder to compile/watch                  | src/main/resources/web  |
 | `-o/--output`   | output folder for .css.dsp files                | target/classes/web      |
-| `-c/--compress` | miniful output files                            | false (optional)        |
+| `-c/--compress` | minify output files                             | false (optional)        |
 | `-i/--imports`  | specify multiple folders for @import resolution | - (optional/multiple)   |
 | `--less-opts`   | json string with custom [less options](http://lesscss.org/usage/#less-options)  | {} |
 | `-w/--watch`    | watch files after successful compile            | false (optional)        |
@@ -76,8 +76,8 @@ button.less
 
 _mybutton.less
 ```less
-@import "/amazingtool/shapes.less" /*will be found below "-i ../3rdparty"*/
-@import "/corporatecolors.less" /*will be found below "-i ../styleguide"*/
+@import "/amazingtool/shapes.less"; /*will be found below "-i ../3rdparty"*/
+@import "/corporatecolors.less"; /*will be found below "-i ../styleguide"*/
 /*my styles*/
 
 .z-button {
