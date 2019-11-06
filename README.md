@@ -126,18 +126,18 @@ e.g. run `zklessc` during the [process-resources phase](https://maven.apache.org
           <goals>
             <goal>exec</goal>
           </goals>
+          <configuration>
+            <executable>zklessc</executable>
+            <arguments>
+              <argument>--source</argument>
+              <argument>${project.basedir}/src/archive/web</argument>
+              <argument>--output</argument>
+              <argument>${project.build.outputDirectory}/web/${project.artifactId}</argument>
+              <argument>--compress</argument>
+            </arguments>
+          </configuration>
         </execution>
       </executions>
-      <configuration>
-        <executable>zklessc</executable>
-        <arguments>
-          <argument>--source</argument>
-          <argument>${project.basedir}/src/archive/web</argument>
-          <argument>--output</argument>
-          <argument>${project.build.outputDirectory}/web/${project.artifactId}</argument>
-          <argument>--compress</argument>
-        </arguments>
-      </configuration>
     </plugin>
     ...
 ```
@@ -154,7 +154,7 @@ or build the project normally
 
 Call the same command from an [Exec](https://docs.gradle.org/current/dsl/org.gradle.api.tasks.Exec.html)-task
 
-### Live Reloading (experimental)
+### Live Reloading (during development)
 
 When `--watch` is enabled an http server is automatically started on port 50000 (or `--live-reload-port`).
 
