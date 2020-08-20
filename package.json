@@ -1,6 +1,6 @@
 {
   "name": "zkless-engine",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Compile ZK Themes using less.",
   "main": "./src/index.js",
   "bin": {
@@ -41,6 +41,6 @@
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
-    "mocha": "^8.0.1"
+    "mocha": "^8.1.1"
   }
 }
