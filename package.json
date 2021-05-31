@@ -34,11 +34,11 @@
   },
   "homepage": "https://github.com/zkoss/zkless-engine",
   "dependencies": {
-    "chokidar": "^3.3.1",
+    "chokidar": "^3.5.1",
     "fs-extra": "^8.1.0",
     "less": "^3.13.1",
     "minimist": "^1.2.5",
-    "socket.io": "^2.4.0"
+    "socket.io": "^4.1.2"
   },
   "devDependencies": {
     "mocha": "^8.1.1"
