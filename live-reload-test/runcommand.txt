@@ -1,0 +1,4 @@
+to test live reloading run 2 consoles from project root:
+
+npx httpserver
+bin/zkless-cli.js --source test/testFiles/theme1/ --output temp/theme1 --imports=test/testFiles/ext1 --imports=test/testFiles/ext2 -w --live-reload-port=4444 --extension=.css

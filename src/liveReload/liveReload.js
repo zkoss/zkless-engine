@@ -17,12 +17,18 @@ module.exports = function (port, initialMessage) {
                     return res.end('Error loading ' + req.url);
                 }
                 liveReloadScript = liveReloadScript.replace('{{port}}', port)
+                res.setHeader('Access-Control-Allow-Origin', '*');
                 res.writeHead(200);
                 res.end(liveReloadScript);
             });
     }
 
-    const io = require('socket.io')(app);
+    const io = require('socket.io')(app, {
+        cors: {
+            origin: "*",
+            methods: ["GET"]
+        }
+    });
     const notifyLifeUpdate = msg => io.emit(msg);
     io.once("connection", () => {
         notifyLifeUpdate(initialMessage)
