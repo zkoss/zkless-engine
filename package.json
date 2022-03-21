@@ -1,6 +1,6 @@
 {
   "name": "zkless-engine",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "description": "Compile ZK Themes using less.",
   "main": "./src/index.js",
   "bin": {
