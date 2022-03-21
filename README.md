@@ -169,11 +169,17 @@ By adding the following scripts to your zk application (zul page or globally) th
 ```
 
 You have to add the socked.io client script provided by the server.
-Besided that there are 3 options for different behaviour.
+Besides, that there are 3 options for different behaviour.
 
-```zklessLiveReloadStyles.js``` -> reload only stylesheets after compliation
+```zklessLiveReloadStyles.js``` -> reload only stylesheets after compilation
 
 ```zklessLiveReloadStylesResize.js``` -> reload stylesheets and call zUtl.fireSized (useful when changing paddings/margins)
 
 ```zklessLiveReloadPage.js``` -> reload the whole page
+
+# Auditing package dependencies for security vulnerabilities
+`npm audit`
+
+After fixing security issues, run test:
+`npm test`
 
