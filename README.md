@@ -1,6 +1,8 @@
 # zkless-engine
 Compile ZK Themes using the [lesscss compiler](http://lesscss.org/).
 
+# Features
+* convert ZK `@import` into a LESS valid path
 
 ## Install / Run
 
@@ -181,5 +183,8 @@ Besides, that there are 3 options for different behaviour.
 `npm audit`
 
 After fixing security issues, run test:
+
 `npm test`
 
+# Publish New version to npm repository
+`npm publish`
